@@ -252,25 +252,30 @@ INSERT INTO order_line (order_id, line_id, quantity, book_id, price) VALUES
 -- CREATING USERS AND USER ROLES --
 -- CREATING ROLES WITH DIFFERENT PRIVILEDGES --
 -- CREATING ROLES --
+-- Step 1: Create the roles
 CREATE ROLE 'admin';
-GRANT ALL ON bookstore_database.* TO admin;
+GRANT ALL PRIVILEGES ON bookstore_database.* TO 'admin';
+
 CREATE ROLE 'sales_manager';
-GRANT SELECT, INSERT, UPDATE ON bookstore_database.* TO sales_manager;
+GRANT SELECT, INSERT, UPDATE ON bookstore_database.* TO 'sales_manager';
+
 CREATE ROLE 'customerRep';
-GRANT SELECT ON bookstore_database.* TO customerRep;
--- CREATING USERS --
-CREATE USER 'admin'@'localhost' IDENTIFIED BY '1234';
-CREATE USER 'sales'@'localhost' IDENTIFIED BY '4567';
-CREATE USER 'costomerRep'@'localhost' IDENTIFIED BY '6789';
---- ASSIGNING ROLES TO USERS --
--- ADMIN USERS --
+GRANT SELECT ON bookstore_database.* TO 'customerRep';
+
+-- Step 2: Create the users
+CREATE USER 'Brilliant'@'localhost' IDENTIFIED BY 'admin123';
+CREATE USER 'Manuel'@'localhost' IDENTIFIED BY 'admin123';
+CREATE USER 'Eugene'@'localhost' IDENTIFIED BY 'admin123';
+
+-- Step 3: Assign roles to users (Assign 'admin' role to the admin users)
 GRANT 'admin' TO 'Brilliant'@'localhost';
 GRANT 'admin' TO 'Manuel'@'localhost';
 GRANT 'admin' TO 'Eugene'@'localhost';
--- OTHER USERS --
--- Assign roles to users
-GRANT 'admin' TO 'admin'@'localhost';
-GRANT 'sales_manager' TO 'sales'@'localhost';
-GRANT 'customerRep' TO 'customerRep'@'localhost';
+
+-- Step 4: Grant ALL privileges on bookstore_database to the admin users
+GRANT ALL PRIVILEGES ON bookstore_database.* TO 'Brilliant'@'localhost';
+GRANT ALL PRIVILEGES ON bookstore_database.* TO 'Manuel'@'localhost';
+GRANT ALL PRIVILEGES ON bookstore_database.* TO 'Eugene'@'localhost';
 -- DONE --
+
 
