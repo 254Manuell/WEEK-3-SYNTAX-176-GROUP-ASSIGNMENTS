@@ -247,3 +247,30 @@ INSERT INTO order_line (order_id, line_id, quantity, book_id, price) VALUES
 (9, 9, 1, 9, 14.90),
 (10, 10, 2, 10, 22.25);
 
+
+
+-- CREATING USERS AND USER ROLES --
+-- CREATING ROLES WITH DIFFERENT PRIVILEDGES --
+-- CREATING ROLES --
+CREATE ROLE 'admin';
+GRANT ALL ON bookstore_database.* TO admin;
+CREATE ROLE 'sales_manager';
+GRANT SELECT, INSERT, UPDATE ON bookstore_database.* TO sales_manager;
+CREATE ROLE 'customerRep';
+GRANT SELECT ON bookstore_database.* TO customerRep;
+-- CREATING USERS --
+CREATE USER 'admin'@'localhost' IDENTIFIED BY '1234';
+CREATE USER 'sales'@'localhost' IDENTIFIED BY '4567';
+CREATE USER 'costomerRep'@'localhost' IDENTIFIED BY '6789';
+--- ASSIGNING ROLES TO USERS --
+-- ADMIN USERS --
+GRANT 'admin' TO 'Brilliant'@'localhost';
+GRANT 'admin' TO 'Manuel'@'localhost';
+GRANT 'admin' TO 'Eugene'@'localhost';
+-- OTHER USERS --
+-- Assign roles to users
+GRANT 'admin' TO 'admin'@'localhost';
+GRANT 'sales_manager' TO 'sales'@'localhost';
+GRANT 'customerRep' TO 'customerRep'@'localhost';
+-- DONE --
+
